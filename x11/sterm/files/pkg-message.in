@@ -1,0 +1,13 @@
+In order to add st.info the the terminal capability database it is required to:
+
+ * Install tic (devel/ncurses).
+ * Run:
+
+   # tic -C -K -s -x %%DATADIR%%/st.info >> /usr/share/misc/termcap
+   # cd %%DATADIR%%
+   # cap_mkdb termcap
+
+Thanks to r331006 [1] this hack is not necessary on FreeBSD 11.2-RELEASE and
+11-STABLE and 12-CURRENT.
+
+[1]: https://svnweb.freebsd.org/base?view=revision&revision=331006
