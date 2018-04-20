@@ -12,10 +12,15 @@ COMMENT=	Clean, elegant, and pragmatic dialect of Forth
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
-CONFLICTS_INSTALL=	audio/listener mail/nmh japanese/mh
+CONFLICTS_INSTALL=	audio/listener mail/nmh japanese/mh lang/ruby
 
 USES=	ncurses
 
+MAKE_ENV=	DATADIR=${DATADIR} \
+		DESTDIR=${DESTDIR} \
+		DOCSDIR=${DOCSDIR} \
+		EXAMPLESDIR=${EXAMPLESDIR} \
+		PREFIX=${PREFIX}
 OPTIONS_DEFINE=	DOCS EXAMPLES
 
 PLIST_FILES=	bin/embedimage \
@@ -24,11 +29,11 @@ PLIST_FILES=	bin/embedimage \
 		bin/listener \
 		bin/muri \
 		bin/repl \
-		bin/retro-ri \
+		bin/ri \
 		bin/rre \
 		bin/unu
 
-PORTDATA=	bin/RETRO12.html \
+PORTDATA=	RETRO12.html \
 		glossary.forth \
 		ngaImage \
 		tests \
@@ -41,21 +46,11 @@ PORTDOCS=	doc \
 
 PORTEXAMPLES=	example
 
+ALL_TARGET=	all
+INSTALL_TARGET=	install-strip
 TEST_TARGET=	test
 
-post-install:
-	(cd ${WRKSRC} && \
-		${COPYTREE_SHARE} "${PORTDATA}" ${STAGEDIR}${DATADIR})
-.for f in embedimage extend injectimage-js muri repl rre unu
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${f}
-.endfor
-	${INSTALL_SCRIPT} ${WRKSRC}/bin/listener ${STAGEDIR}${PREFIX}/bin/listener
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/ri ${STAGEDIR}${PREFIX}/bin/retro-ri
-
-do-install-DOCS-on:
-	cd ${WRKSRC} &&	${COPYTREE_SHARE} "${PORTDOCS}" ${STAGEDIR}${DOCSDIR}
-
-do-install-EXAMPLES-on:
-	cd ${WRKSRC} &&	${COPYTREE_SHARE} "${PORTEXAMPLES}" ${STAGEDIR}${EXAMPLESDIR}
+post-patch:
+	${RM} ${WRKSRC}/example/Atua.forth.orig ${WRKSRC}/example/Atua-WWW.forth.orig
 
 .include <bsd.port.mk>
