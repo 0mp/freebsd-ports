@@ -60,7 +60,7 @@ install-docs:
 	install -c -m 644 RELEASE_NOTES.md $(DESTDIR)$(DOCSDIR)/RELEASE_NOTES.md
 
 install-examples:
-	install -c -m 755 -d -- $(DESTDIR)$(EXAMPLESDIR)
+	install -m 755 -d -- $(DESTDIR)$(EXAMPLESDIR)
 	cp -fpR example $(DESTDIR)$(EXAMPLESDIR)
 
 test: bin/rre
