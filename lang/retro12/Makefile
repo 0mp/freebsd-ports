@@ -12,6 +12,7 @@ COMMENT=	Clean, elegant, and pragmatic dialect of Forth
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
+# Conflicting files: bin/listener bin/repl bin/ri
 CONFLICTS_INSTALL=	audio/listener mail/nmh japanese/mh lang/ruby
 
 USES=	ncurses
