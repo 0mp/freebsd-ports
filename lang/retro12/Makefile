@@ -1,10 +1,13 @@
 # $FreeBSD$
 
 PORTNAME=	retro12
-DISTVERSION=	2018.4
+# DISTVERSION=	2018.4
 CATEGORIES=	lang
-MASTER_SITES=	https://forthworks.com/retro/r/
-DISTNAME=	${PORTNAME:tu}-${DISTVERSION}
+# MASTER_SITES=	https://forthworks.com/retro/r/
+# DISTNAME=	${PORTNAME:tu}-${DISTVERSION}
+DISTVERSION=	2018.4.21
+MASTER_SITES=	http://forthworks.com:8000/tarball/
+DISTNAME=	RETRO12-fb7ffce0d7.tar.gz
 
 MAINTAINER=	0mp@FreeBSD.org
 COMMENT=	Clean, elegant, and pragmatic dialect of Forth
@@ -49,8 +52,5 @@ PORTEXAMPLES=	example
 ALL_TARGET=	all
 INSTALL_TARGET=	install-strip
 TEST_TARGET=	test
-
-post-patch:
-	${RM} ${WRKSRC}/example/Atua.forth.orig ${WRKSRC}/example/Atua-WWW.forth.orig
 
 .include <bsd.port.mk>

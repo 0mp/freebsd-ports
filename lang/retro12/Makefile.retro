@@ -21,7 +21,7 @@ clean:
 	rm -f bin/unu
 
 install: build install-data install-docs install-examples
-	install -c -m 755 -d -- $(DESTDIR)$(PREFIX)/bin
+	install -m 755 -d -- $(DESTDIR)$(PREFIX)/bin
 	install -c -m 755 bin/embedimage $(DESTDIR)$(PREFIX)/bin/embedimage
 	install -c -m 755 bin/extend $(DESTDIR)$(PREFIX)/bin/extend
 	install -c -m 755 bin/injectimage-js $(DESTDIR)$(PREFIX)/bin/injectimage-js
@@ -33,7 +33,7 @@ install: build install-data install-docs install-examples
 	install -c -m 755 bin/unu $(DESTDIR)$(PREFIX)/bin/unu
 
 install-strip: build install-data install-docs install-examples
-	install -c -m 755 -d -- $(DESTDIR)/bin
+	install -m 755 -d -- $(DESTDIR)/bin
 	install -c -m 755 -s bin/embedimage $(DESTDIR)$(PREFIX)/bin/embedimage
 	install -c -m 755 -s bin/extend $(DESTDIR)$(PREFIX)/bin/extend
 	install -c -m 755 -s bin/injectimage-js $(DESTDIR)$(PREFIX)/bin/injectimage-js
@@ -45,7 +45,7 @@ install-strip: build install-data install-docs install-examples
 	install -c -m 755 -s bin/unu $(DESTDIR)$(PREFIX)/bin/unu
 
 install-data: bin/RETRO12.html
-	install -c -m 755 -d -- $(DESTDIR)$(DATADIR)
+	install -m 755 -d -- $(DESTDIR)$(DATADIR)
 	install -c -m 644 bin/RETRO12.html $(DESTDIR)$(DATADIR)/RETRO12.html
 	install -c -m 644 glossary.forth $(DESTDIR)$(DATADIR)/glossary.forth
 	install -c -m 644 ngaImage $(DESTDIR)$(DATADIR)/ngaImage
@@ -53,16 +53,15 @@ install-data: bin/RETRO12.html
 	install -c -m 644 words.tsv $(DESTDIR)$(DATADIR)/words.tsv
 
 install-docs:
-	install -d -- $(DESTDIR)$(DOCSDIR)
+	install -m 755 -d -- $(DESTDIR)$(DOCSDIR)
 	cp -fpR doc $(DESTDIR)$(DOCSDIR)
 	cp -fpR literate $(DESTDIR)$(DOCSDIR)
 	install -c -m 644 README.md $(DESTDIR)$(DOCSDIR)/README.md
 	install -c -m 644 RELEASE_NOTES.md $(DESTDIR)$(DOCSDIR)/RELEASE_NOTES.md
 
 install-examples:
-	install -d -- $(DESTDIR)$(EXAMPLESDIR)
+	install -c -m 755 -d -- $(DESTDIR)$(EXAMPLESDIR)
 	cp -fpR example $(DESTDIR)$(EXAMPLESDIR)
-
 
 test: bin/rre
 	./bin/rre tests/test-core.forth
