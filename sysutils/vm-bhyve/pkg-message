@@ -1,11 +1,11 @@
-To enable vm-bhyve, please add the following lines to /etc/rc.conf,
+To enable vm-bhyve, please add the following lines to %%ETCDIR%%/rc.conf,
 depending on whether you are using ZFS storage or not. Please note
 that the directory or dataset specified should already exist.
 
     vm_enable="YES"
     vm_dir="zfs:pool/dataset"
 
-OR
+or
 
     vm_enable="YES"
     vm_dir="/directory/path"

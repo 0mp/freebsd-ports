@@ -1,6 +1,23 @@
-A frontend for bhyve which provides the 'vm' command
-Create/start/stop virtual machines easily
-Bridged/NAT networking
-BSD/Linux/Windows guest support
+vm-bhyve is a popular management system for FreeBSD bhyve virtual machines.
+It provides a CLI tool called 'vm', which acts as a front-end for bhyve.
+
+Some of the main features include:
+
+ - Windows/UEFI support
+ - Simple commands to create/start/stop bhyve instances
+ - Simple configuration file format
+ - Virtual switches supporting vlans & nat (no manual tap or bridge devices
+   needed)
+ - ZFS support
+ - FreeBSD/NetBSD/OpenBSD/Linux guest support
+ - Automatic assignment of console devices to access guest console
+ - Integration with rc.d startup/shutdown
+ - Guest reboot handling
+ - Designed with multiple compute nodes + shared storage in mind
+   (NFS/iSCSI/etc)
+ - Multiple datastores (1.1 only)
+ - VNC graphics & tmux support (1.1 only. See wiki for instructions)
+
+More details on the project's wiki: https://github.com/churchers/vm-bhyve/wiki
 
 WWW: https://github.com/churchers/vm-bhyve
