@@ -1,0 +1,8 @@
+bat is a cat(1) clone with syntax highlighting and Git integration written in
+Rust.
+
+It supports syntax highlighting for a large number of programming and markup
+languages and is capable of communicating with Git to show modifications with
+respect to the index visible on the left side bar of this CLI.
+
+WWW: https://github.com/sharkdp/bat
