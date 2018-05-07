@@ -1,4 +1,4 @@
-TIMESTAMP = 1525276388
+TIMESTAMP = 1525643344
 SHA256 (rust/crates/aho-corasick-0.6.4.tar.gz) = d6531d44de723825aa81398a6415283229725a00fa30713812ab9323faa82fc4
 SIZE (rust/crates/aho-corasick-0.6.4.tar.gz) = 25443
 SHA256 (rust/crates/ansi_term-0.11.0.tar.gz) = ee49baf6cb617b853aa8d93bf420db2383fab46d314482ca2803b40d5fde979b
@@ -37,8 +37,8 @@ SHA256 (rust/crates/console-0.6.1.tar.gz) = 7649ca90478264b9686aac8d269fcb014f14
 SIZE (rust/crates/console-0.6.1.tar.gz) = 12181
 SHA256 (rust/crates/curl-sys-0.4.2.tar.gz) = f3f7738d877ec81040305d5bb91976ac594f564f5e455dc02a29a23c1d00fe6f
 SIZE (rust/crates/curl-sys-0.4.2.tar.gz) = 2983033
-SHA256 (rust/crates/directories-0.9.0.tar.gz) = 52bdea76de17dee3b166076dc4eeaf1d3df65fc094918a16776c2675b79ced50
-SIZE (rust/crates/directories-0.9.0.tar.gz) = 16203
+SHA256 (rust/crates/directories-0.10.0.tar.gz) = fc2561db021b6f1321d0f16b67ed28ce843ef4610dfaa432e3ffa2e8a3050ebf
+SIZE (rust/crates/directories-0.10.0.tar.gz) = 16116
 SHA256 (rust/crates/dtoa-0.4.2.tar.gz) = 09c3753c3db574d215cba4ea76018483895d7bff25a31b49ba45db21c48e50ab
 SIZE (rust/crates/dtoa-0.4.2.tar.gz) = 14227
 SHA256 (rust/crates/duct-0.10.0.tar.gz) = 166298c17c5b4fe5997b962c2f22e887c7c5adc44308eb9103ce5b66af45a423

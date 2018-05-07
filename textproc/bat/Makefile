@@ -13,13 +13,12 @@ LICENSE_COMB=	dual
 LICENSE_FILE_APACHE20=	${WRKSRC}/LICENSE-APACHE
 LICENSE_FILE_MIT=	${WRKSRC}/LICENSE-MIT
 
-USES=		cargo gmake
+USES=		cargo cmake gmake
 USE_GITHUB=	yes
 GH_ACCOUNT=	sharkdp
 
-# XXX: dictionaries seem to not support FreeBSD as of 0.9.0
-# https://github.com/soc/directories-rs/blob/master/src/lin.rs
-CARGO_CRATES= aho-corasick-0.6.4 \
+CARGO_CRATES= libc-0.2.40 \
+	      aho-corasick-0.6.4 \
 	      ansi_term-0.11.0 \
 	      ansi_term-0.9.0 \
 	      atty-0.2.8 \
@@ -38,7 +37,7 @@ CARGO_CRATES= aho-corasick-0.6.4 \
 	      cmake-0.1.29 \
 	      console-0.6.1 \
 	      curl-sys-0.4.2 \
-	      directories-0.9.0 \
+	      directories-0.10.0 \
 	      dtoa-0.4.2 \
 	      duct-0.10.0 \
 	      error-chain-0.11.0 \
@@ -53,7 +52,6 @@ CARGO_CRATES= aho-corasick-0.6.4 \
 	      lazy_static-0.2.11 \
 	      lazy_static-1.0.0 \
 	      lazycell-0.6.0 \
-	      libc-0.2.40 \
 	      libgit2-sys-0.6.19 \
 	      libssh2-sys-0.2.6 \
 	      libz-sys-1.0.18 \
