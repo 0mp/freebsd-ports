@@ -6,8 +6,8 @@
  install: mtm
 -	cp mtm $(DESTDIR)/bin
 -	cp mtm.1 $(DESTDIR)/share/man/man1
-+	cp mtm $(DESTDIR)$(PREFIX)/bin
-+	cp mtm.1 $(DESTDIR)$(PREFIX)/man/man1
++	${BSD_INSTALL_PROGRAM} mtm $(DESTDIR)$(PREFIX)/bin
++	${BSD_INSTALL_MAN} mtm.1 $(DESTDIR)$(PREFIX)/man/man1
  
  install-terminfo: mtm.ti
  	tic -s -x mtm.ti

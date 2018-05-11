@@ -26,6 +26,5 @@ PORTDATA=	mtm.ti
 post-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	${INSTALL_DATA} ${WRKSRC}/mtm.ti ${STAGEDIR}${DATADIR}/mtm.ti
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/mtm
 
 .include <bsd.port.mk>
