@@ -8,6 +8,7 @@ MAINTAINER=	0mp@FreeBSD.org
 COMMENT=	Terminal multiplexer focued on simplicity, compatibility and stability
 
 LICENSE=	GPLv3+
+LICENSE_FILE=	${WRKSRC}/README.rst
 
 USES=		ncurses
 
