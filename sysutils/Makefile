@@ -710,6 +710,7 @@
     SUBDIR += msiklm
     SUBDIR += msktutil
     SUBDIR += msyslog
+    SUBDIR += mtm
     SUBDIR += mtpfs
     SUBDIR += mtxorbd
     SUBDIR += multitail
