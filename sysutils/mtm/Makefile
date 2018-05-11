@@ -23,7 +23,7 @@ MAKE_ARGS+=	LIBS='-lutil -lncursesw'
 PORTDATA=	mtm.ti
 
 post-install:
-	@${MKDIR} -p ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	${INSTALL_DATA} ${WRKSRC}/mtm.ti ${STAGEDIR}${DATADIR}/mtm.ti
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/mtm
 
