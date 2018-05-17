@@ -1,0 +1,21 @@
+miniserve is a small, self-contained cross-platform CLI tool that allows you
+to just grab the binary and serve some file(s) via HTTP. Sometimes this is just
+a more practical and quick way than doing things properly.
+
+Features:
+
+    - Easy to use
+    - Just works: Correct MIME types handling out of the box
+    - Single binary drop-in with no extra dependencies required
+    - Authentication support with username and password
+    - Mega fast and highly parallel (thanks to Rust and Actix)
+
+It is an interesting alternative to some popular solutions:
+
+    - darkhttpd: Not easily available on Windows and it's not as easy
+      as download and go.
+    - Python built-in webserver: Need to have Python installed, it's low
+      performance, and also doesn't do correct MIME type handling in some
+      cases.
+
+WWW: https://github.com/svenstaro/miniserve
