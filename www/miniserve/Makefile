@@ -2,8 +2,7 @@
 
 PORTNAME=	miniserve
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.1.4
-DISTVERSIONSUFFIX=	-1-gdc1e6d4
+DISTVERSION=	0.1.5
 CATEGORIES=	www
 
 MAINTAINER=	0mp@FreeBSD.org
@@ -206,4 +205,3 @@ post-install:
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/miniserve
 
 .include <bsd.port.mk>
-

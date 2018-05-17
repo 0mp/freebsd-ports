@@ -1,4 +1,4 @@
-TIMESTAMP = 1526558112
+TIMESTAMP = 1526588326
 SHA256 (rust/crates/actix-0.5.6.tar.gz) = e767e3170dc7cdec50fe1b74d22fd9d2f4b78b97b2052a254b5acb07dae68634
 SIZE (rust/crates/actix-0.5.6.tar.gz) = 70440
 SHA256 (rust/crates/actix-web-0.6.5.tar.gz) = 435537ef24396f3690d4c03025be3ddf599cda9a7c30b732f2aeb2c718fa9936
@@ -365,5 +365,5 @@ SHA256 (rust/crates/winutil-0.1.1.tar.gz) = 7daf138b6b14196e3830a588acf1e86966c6
 SIZE (rust/crates/winutil-0.1.1.tar.gz) = 1880
 SHA256 (rust/crates/ws2_32-sys-0.2.1.tar.gz) = d59cefebd0c892fa2dd6de581e937301d8552cb44489cdff035c6187cb63fa5e
 SIZE (rust/crates/ws2_32-sys-0.2.1.tar.gz) = 4697
-SHA256 (svenstaro-miniserve-v0.1.4-1-gdc1e6d4_GH0.tar.gz) = 28172b7c5fdec561172ac8e1cca0e2c97d244e744df393e0ce83c4efa61f912f
-SIZE (svenstaro-miniserve-v0.1.4-1-gdc1e6d4_GH0.tar.gz) = 19287
+SHA256 (svenstaro-miniserve-v0.1.5_GH0.tar.gz) = b435471cd08f3dbe080e26a0b6937c824502a87659948f49b5d2e54f07de64e0
+SIZE (svenstaro-miniserve-v0.1.5_GH0.tar.gz) = 19272

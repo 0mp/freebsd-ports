@@ -17,5 +17,7 @@ It is an interesting alternative to some popular solutions:
     - Python built-in webserver: Need to have Python installed, it's low
       performance, and also doesn't do correct MIME type handling in some
       cases.
+    - netcat: Not as convenient to use and sending directories is
+      somewhat nontrivial.
 
 WWW: https://github.com/svenstaro/miniserve
