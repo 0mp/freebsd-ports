@@ -8,8 +8,11 @@ CATEGORIES=	www
 MAINTAINER=	0mp@FreeBSD.org
 COMMENT=	HTTP server for file sharing with correct MIME types handling
 
-LICENSE=	MIT
-LICENSE_FILE=	${WRKSRC}/LICENSE
+# LICENSE.txt of the untrusted crate contains ISCL.
+LICENSE=	APACHE20 BSD3CLAUSE CC0-1.0 ISCL MIT MPL20 UNLICENSE UNKNOWNRING
+LICENSE_COMB=	multi
+LICENSE_FILE_MIT=	${WRKSRC}/LICENSE
+LICENSE_PERMS_UNKNOWNRING=	dist-mirror pkg-mirror auto-accept
 
 USES=	cargo
 USE_GITHUB=	yes
