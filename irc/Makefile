@@ -60,6 +60,7 @@
     SUBDIR += konversation
     SUBDIR += kvirc
     SUBDIR += kvirc-qt4
+    SUBDIR += libcommuni
     SUBDIR += libircclient
     SUBDIR += lostirc
     SUBDIR += miau
