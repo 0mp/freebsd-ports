@@ -1,0 +1,3 @@
+#! /bin/sh -
+
+%%PYTHON_CMD%% %%DATADIR%%/k40_whisperer.py
