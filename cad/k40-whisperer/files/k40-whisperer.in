@@ -1,3 +1,5 @@
 #! /bin/sh -
+#
+# $FreeBSD$
 
-%%PYTHON_CMD%% %%DATADIR%%/k40_whisperer.py
+exec %%PYTHON_CMD%% %%DATADIR%%/k40_whisperer.py
