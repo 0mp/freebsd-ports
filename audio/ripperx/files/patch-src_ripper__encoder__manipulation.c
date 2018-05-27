@@ -1,28 +1,31 @@
---- src/ripper_encoder_manipulation.c.orig	2010-11-07 05:42:25 UTC
+--- src/ripper_encoder_manipulation.c.orig	2012-02-05 18:13:33 UTC
 +++ src/ripper_encoder_manipulation.c
-@@ -16,7 +16,6 @@
- #include <fcntl.h>
- #include <sys/wait.h>
+@@ -49,7 +49,6 @@
+ #endif
+ 
  #include <sys/ioctl.h>
 -#include <pty.h>
  
- #include "ripper_encoder_manipulation.h"
- #include "misc_utils.h"
-@@ -340,7 +339,7 @@ int execute_ripper_encoder_with_plugin( 
- 		dup2( pty_fd0, 0 );
- 		dup2( tty_fd1, 1 );
+ #include <glib.h>
+ #include <glib/gi18n.h>
+@@ -317,7 +316,7 @@ static int execute_ripper_encoder_with_plugin(const ch
+         dup2(pty_fd0, 0);
+         dup2(tty_fd1, 1);
  
--		setpgrp();
-+		setpgid(0, 0);
- 		execvp( plugin_argv[ 0 ], plugin_argv );
+-        setpgrp();
++        setpgid(0, 0);
+ 	execute_using_shell(pi_com);
  
- 		dup2( stderr_fd, 2 );
-@@ -373,7 +372,7 @@ int execute_ripper_encoder_with_plugin( 
- 		dup2( tty_fd0, 1 );
- 		dup2( tty_fd0, 2 );
+         dup2(stderr_fd, 2);
+@@ -351,9 +350,9 @@ static int execute_ripper_encoder_with_plugin(const ch
+         dup2(tty_fd0, 1);
+         dup2(tty_fd0, 2);
  
--		setpgrp();
-+		setpgid(0, 0);
- 		execvp( program_argv[ 0 ], program_argv );
- 
- 		dup2( stderr_fd, 2 );
+-        setpgrp();
++        setpgid(0, 0);
+ 	execute_using_shell(pg_com);
+-	
++
+         dup2(stderr_fd, 2);
+         perror(_("Failed to exec the specified program"));
+         _exit(127);

@@ -2,18 +2,20 @@
 # $FreeBSD$
 
 PORTNAME=	ripperx
-PORTVERSION=	2.7.3
-PORTREVISION=	2
+PORTVERSION=	2.8.0
 CATEGORIES=	audio
 MASTER_SITES=	SF
-DISTNAME=	ripperX-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GTK program to rip CD audio tracks and encode them
 
-LIB_DEPENDS=	libid3.so:audio/id3lib
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+LIB_DEPENDS=	libtag.so:audio/taglib
 RUN_DEPENDS=	cdparanoia:audio/cdparanoia
 
+MAKE_ARGS=	CC=${CXX}
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	ac_cv_lib_id3_ID3Tag_Link=yes
 CPPFLAGS+=	-I${LOCALBASE}/include
