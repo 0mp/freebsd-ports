@@ -6,6 +6,7 @@
     SUBDIR += 44bsd-csh
     SUBDIR += bash
     SUBDIR += bash-completion
+    SUBDIR += bash-completion-freebsd
     SUBDIR += bash-static
     SUBDIR += bashc
     SUBDIR += ch
