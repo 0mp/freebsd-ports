@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	bash-completion-freebsd
-PORTVERSION=	0.1.0
+PORTVERSION=	0.2.0
 CATEGORIES=	shells
 
 MAINTAINER=	0mp@FreeBSD.org
@@ -12,7 +12,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	${LOCALBASE}/share/bash-completion/bash_completion.sh:shells/bash-completion
 
-PLIST_FILES=	share/bash-completion/completions/service
+PLIST_FILES=	share/bash-completion/completions/mandoc \
+		share/bash-completion/completions/service
 
 NO_BUILD=	yes
 NO_ARCH=	yes
