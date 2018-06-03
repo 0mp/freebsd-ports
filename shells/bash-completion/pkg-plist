@@ -657,6 +657,9 @@ libdata/pkgconfig/bash-completion.pc
 %%DATADIR%%/completions/zopflipng
 %%DATADIR%%/helpers/perl
 %%DATADIR%%/helpers/python
+%%FREEBSD%%etc/bash_completion.d/mandoc
+%%FREEBSD%%etc/bash_completion.d/pkg
+%%FREEBSD%%etc/bash_completion.d/service
 %%CMAKE_MODULES%%share/cmake/Modules/bash-completion/bash-completion-config-version.cmake
 %%CMAKE_MODULES%%share/cmake/Modules/bash-completion/bash-completion-config.cmake
 %%PORTDOCS%%%%DOCSDIR%%/CHANGES
