@@ -1,7 +1,0 @@
-This is an extension to the programmable completion convenience library for the
-Bash shell known as bash-completion.
-
-The aim of this package is to provide Bash completion for FreeBSD-specific
-tools and utilities.
-
-WWW: https://github.com/0mp/bash-completion-freebsd
