@@ -1,0 +1,68 @@
+--- configure.ac.orig	2018-10-01 20:51:23 UTC
++++ configure.ac
+@@ -147,7 +147,7 @@ AC_SUBST(storedir)
+ 
+ 
+ # Look for OpenSSL, a required dependency.
+-PKG_CHECK_MODULES([OPENSSL], [libcrypto], [CXXFLAGS="$OPENSSL_CFLAGS $CXXFLAGS"])
++AC_CHECK_HEADERS([openssl/ssl.h], [CXXFLAGS="$OPENSSL_CFLAGS $CXXFLAGS"])
+ 
+ 
+ # Look for libbz2, a required dependency.
+@@ -162,7 +162,7 @@ PKG_CHECK_MODULES([SQLITE3], [sqlite3 >= 3.6.19], [CXX
+ 
+ 
+ # Look for libcurl, a required dependency.
+-PKG_CHECK_MODULES([LIBCURL], [libcurl], [CXXFLAGS="$LIBCURL_CFLAGS $CXXFLAGS"])
++AC_CHECK_HEADERS([/usr/local/include/curl/curl.h], [CXXFLAGS="$LIBCURL_CFLAGS $CXXFLAGS"])
+ 
+ 
+ # Look for libsodium, an optional dependency.
+@@ -180,7 +180,7 @@ AC_CHECK_LIB([lzma], [lzma_stream_encoder_mt],
+ 
+ 
+ # Look for libbrotli{enc,dec}.
+-PKG_CHECK_MODULES([LIBBROTLI], [libbrotlienc libbrotlidec], [CXXFLAGS="$LIBBROTLI_CFLAGS $CXXFLAGS"])
++AC_CHECK_HEADERS([/usr/local/include/brotli/decode.h], [CXXFLAGS="$LIBBROTLI_CFLAGS $CXXFLAGS"])
+ 
+ 
+ # Look for libseccomp, required for Linux sandboxing.
+@@ -212,9 +212,11 @@ AC_SUBST(ENABLE_S3, [$enable_s3])
+ AC_LANG_POP(C++)
+ 
+ if test -n "$enable_s3"; then
+-  declare -a aws_version_tokens=($(printf '#include <aws/core/VersionConfig.h>\nAWS_SDK_VERSION_STRING' | $CPP $CPPFLAGS - | grep -v '^#.*' | sed 's/"//g' | tr '.' ' '))
+-  AC_DEFINE_UNQUOTED([AWS_VERSION_MAJOR], ${aws_version_tokens@<:@0@:>@}, [Major version of aws-sdk-cpp.])
+-  AC_DEFINE_UNQUOTED([AWS_VERSION_MINOR], ${aws_version_tokens@<:@1@:>@}, [Minor version of aws-sdk-cpp.])
++  aws_version_tokens="$(printf '#include <aws/core/VersionConfig.h>\nAWS_SDK_VERSION_STRING' | $CPP $CPPFLAGS - | grep -v '^#.*' | sed 's/"//g' | tr '.' ' ')"
++  aws_major_version="$(awk -v ver="${aws_version_tokens}" '{print $1}')"
++  aws_minor_version="$(awk -v ver="${aws_version_tokens}" '{print $2}')"
++  AC_DEFINE_UNQUOTED([AWS_VERSION_MAJOR], ${aws_major_version}, [Major version of aws-sdk-cpp.])
++  AC_DEFINE_UNQUOTED([AWS_VERSION_MINOR], ${aws_minor_version}, [Minor version of aws-sdk-cpp.])
+ fi
+ 
+ 
+@@ -249,6 +251,7 @@ AC_CHECK_FUNCS([strsignal posix_fallocate sysconf])
+ if test "$(uname)" = "Darwin"; then
+     LDFLAGS="-all_load $LDFLAGS"
+ fi
++LDFLAGS="-v"
+ 
+ 
+ # Figure out the extension of dynamic libraries.
+@@ -277,9 +280,12 @@ AC_SUBST(sandbox_shell)
+ test "$prefix" = NONE && prefix=$ac_default_prefix
+ test "$exec_prefix" = NONE && exec_prefix='${prefix}'
+ for name in $ac_subst_vars; do
+-    declare $name="$(eval echo "${!name}")"
+-    declare $name="$(eval echo "${!name}")"
+-    declare $name="$(eval echo "${!name}")"
++    for _ in 1 2 3; do
++    if printf '%s' "${name}" | egrep '^[_[:alpha:]][_[:alnum:]]*$'
++    then
++        eval "${name}"="$(eval echo "\${${name}}")"
++    fi
++    done
+ done
+ 
+ rm -f Makefile.config
