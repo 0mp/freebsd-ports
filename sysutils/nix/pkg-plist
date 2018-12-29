@@ -116,12 +116,3 @@ share/doc/manual/images/callouts/9.gif
 share/doc/manual/index.html
 share/doc/manual/manual.html
 share/doc/manual/style.css
-%%DATADIR%%/corepkgs/buildenv.nix
-%%DATADIR%%/corepkgs/config.nix
-%%DATADIR%%/corepkgs/derivation.nix
-%%DATADIR%%/corepkgs/fetchurl.nix
-%%DATADIR%%/corepkgs/imported-drv-to-derivation.nix
-%%DATADIR%%/corepkgs/unpack-channel.nix
-%%DATADIR%%/sandbox/sandbox-defaults.sb
-%%DATADIR%%/sandbox/sandbox-minimal.sb
-%%DATADIR%%/sandbox/sandbox-network.sb

@@ -30,6 +30,8 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-seccomp-sandboxing --enable-gc
 # Otherwise "environ" is undefined.
 MAKE_ARGS=	libutil_ALLOW_UNDEFINED=yes
+PORTDATA=	*
+TEST_TARGET=	installcheck
 
 STRIP_TARGETS=	bin/nix-instantiate bin/nix-store bin/nix-copy-closure \
 		bin/nix bin/nix-channel bin/nix-env bin/nix-build \
