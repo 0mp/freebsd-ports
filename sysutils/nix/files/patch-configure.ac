@@ -9,24 +9,6 @@
  
  
  # Look for libbz2, a required dependency.
-@@ -162,7 +162,7 @@ PKG_CHECK_MODULES([SQLITE3], [sqlite3 >= 3.6.19], [CXX
- 
- 
- # Look for libcurl, a required dependency.
--PKG_CHECK_MODULES([LIBCURL], [libcurl], [CXXFLAGS="$LIBCURL_CFLAGS $CXXFLAGS"])
-+AC_CHECK_HEADERS([/usr/local/include/curl/curl.h], [CXXFLAGS="$LIBCURL_CFLAGS $CXXFLAGS"])
- 
- 
- # Look for libsodium, an optional dependency.
-@@ -180,7 +180,7 @@ AC_CHECK_LIB([lzma], [lzma_stream_encoder_mt],
- 
- 
- # Look for libbrotli{enc,dec}.
--PKG_CHECK_MODULES([LIBBROTLI], [libbrotlienc libbrotlidec], [CXXFLAGS="$LIBBROTLI_CFLAGS $CXXFLAGS"])
-+AC_CHECK_HEADERS([/usr/local/include/brotli/decode.h], [CXXFLAGS="$LIBBROTLI_CFLAGS $CXXFLAGS"])
- 
- 
- # Look for libseccomp, required for Linux sandboxing.
 @@ -212,9 +212,11 @@ AC_SUBST(ENABLE_S3, [$enable_s3])
  AC_LANG_POP(C++)
  
