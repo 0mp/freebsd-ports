@@ -1,13 +1,5 @@
 --- vio/viosslfactories.cc.orig	2022-07-06 21:36:34 UTC
 +++ vio/viosslfactories.cc
-@@ -40,6 +40,7 @@
- #include "vio/vio_priv.h"
- 
- #include <openssl/dh.h>
-+#include <openssl/crypto.h>
- 
- #if OPENSSL_VERSION_NUMBER < 0x10002000L
- #include <openssl/ec.h>
 @@ -484,7 +485,7 @@ long process_tls_version(const char *tls_version) {
    const char *separator = ",";
    char *token, *lasts = nullptr;
