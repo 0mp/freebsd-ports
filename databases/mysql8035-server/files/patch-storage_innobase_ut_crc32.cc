@@ -1,15 +1,5 @@
 --- storage/innobase/ut/crc32.cc.orig	2021-12-17 17:07:27 UTC
 +++ storage/innobase/ut/crc32.cc
-@@ -111,7 +111,9 @@ external tools. */
- #endif /* CRC32_ARM64 */
- 
- #ifdef CRC32_ARM64_DEFAULT
-+#ifndef __FreeBSD__
- #include <asm/hwcap.h>
-+#endif
- #include <sys/auxv.h>
- #endif /* CRC32_ARM64_DEFAULT */
- 
 @@ -360,8 +362,25 @@ bool can_use_poly_mul() { return true; }
  #endif /* CRC32_ARM64_APPLE */
  
