@@ -1,6 +1,6 @@
---- router/src/harness/src/tls_client_context.cc.orig	2021-12-17 16:07:27 UTC
+--- router/src/harness/src/tls_client_context.cc.orig	2023-10-12 11:45:01 UTC
 +++ router/src/harness/src/tls_client_context.cc
-@@ -61,7 +61,7 @@ stdx::expected<void, std::error_code> TlsClientContext
+@@ -65,7 +65,7 @@ stdx::expected<void, std::error_code> TlsClientContext
  stdx::expected<void, std::error_code> TlsClientContext::cipher_suites(
      const std::string &ciphers) {
  // TLSv1.3 ciphers are controlled via SSL_CTX_set_ciphersuites()

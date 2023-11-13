@@ -1,4 +1,4 @@
---- client/CMakeLists.txt.orig	2021-09-28 11:46:34 UTC
+--- client/CMakeLists.txt.orig	2023-10-12 11:45:01 UTC
 +++ client/CMakeLists.txt
 @@ -28,10 +28,13 @@ DISABLE_MISSING_PROFILE_WARNING()
  ## Subdirectory with common client code.
@@ -22,7 +22,7 @@
  
  IF(NOT WITHOUT_SERVER)
    MYSQL_ADD_EXECUTABLE(mysql_upgrade
-@@ -55,6 +59,7 @@ IF(NOT_WITHOUT_SERVER)
+@@ -55,6 +59,7 @@ IF(NOT WITHOUT_SERVER)
      )
  ENDIF()
  
@@ -40,7 +40,7 @@
  MYSQL_ADD_EXECUTABLE(mysqlcheck
    check/mysqlcheck.cc
    check/mysqlcheck_core.cc
-@@ -250,7 +258,9 @@ ENDIF()
+@@ -275,7 +283,9 @@ ENDIF()
  
  TARGET_COMPILE_DEFINITIONS(mysqlbinlog PRIVATE DISABLE_PSI_MUTEX)
  TARGET_INCLUDE_DIRECTORIES(mysqlbinlog PRIVATE ${CMAKE_SOURCE_DIR}/sql)
@@ -50,7 +50,7 @@
  MYSQL_ADD_EXECUTABLE(mysqladmin
    mysqladmin.cc
    multi_factor_passwordopt-vars.cc
-@@ -265,6 +275,9 @@ MYSQL_ADD_EXECUTABLE(mysql_config_editor
+@@ -290,6 +300,9 @@ MYSQL_ADD_EXECUTABLE(mysql_config_editor
    mysql_config_editor.cc
    LINK_LIBRARIES mysqlclient
    )
@@ -60,7 +60,7 @@
  MYSQL_ADD_EXECUTABLE(mysql_secure_installation
    mysql_secure_installation.cc
    LINK_LIBRARIES mysqlclient
-@@ -275,6 +288,7 @@ MYSQL_ADD_EXECUTABLE(mysql_ssl_rsa_setup
+@@ -300,6 +313,7 @@ MYSQL_ADD_EXECUTABLE(mysql_ssl_rsa_setup
    path.cc
    LINK_LIBRARIES mysys
    )
