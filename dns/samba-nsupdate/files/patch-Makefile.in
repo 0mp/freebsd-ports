@@ -1,0 +1,13 @@
+--- Makefile.in.orig	2025-08-13 17:21:07 UTC
++++ Makefile.in
+@@ -512,9 +512,8 @@ LIBISCCC_LIBS = \
+ # build libtest before fuzz/* and bin/tests
+ 
+ # run fuzz tests before system tests
+-SUBDIRS = . lib doc tests fuzz bin
++SUBDIRS = lib bin
+ EXTRA_DIST = \
+-	bind.keys		\
+ 	util/bindkeys.pl	\
+ 	util/dtrace.sh		\
+ 	contrib			\

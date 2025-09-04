@@ -1,6 +1,5 @@
 PORTNAME=	nsupdate
-DISTVERSION=	9.16.5
-PORTREVISION=	1
+DISTVERSION=	9.20.12
 CATEGORIES=	dns net
 MASTER_SITES=	ISC/bind9/${DISTVERSION}
 PKGNAMEPREFIX=	samba-
@@ -53,8 +52,6 @@ CONFIGURE_ARGS=	--disable-dnstap \
 
 MAKE_JOBS_UNSAFE=	yes
 
-EXTRA_PATCHES=	${PATCHDIR}/extrapatch-bind-tools
-
 PLIST_FILES=	bin/${PKGBASE} \
 		share/man/man1/${PKGBASE}.1.gz
 
@@ -71,15 +68,15 @@ VIOLATE_RFC_2845_DESC=	Disable false TSIG error with Windows or Samba Internal D
 
 GSSAPI_BASE_USES=		gssapi
 GSSAPI_BASE_CONFIGURE_ON=	--with-gssapi=${GSSAPIBASEDIR} \
-				KRB5CONFIG="${KRB5CONFIG}"
+				KRB5_CONFIG="${KRB5CONFIG}"
 
 GSSAPI_HEIMDAL_USES=		gssapi:heimdal
 GSSAPI_HEIMDAL_CONFIGURE_ON=	--with-gssapi=${GSSAPIBASEDIR} \
-				KRB5CONFIG="${KRB5CONFIG}"
+				KRB5_CONFIG="${KRB5CONFIG}"
 
 GSSAPI_MIT_USES=		gssapi:mit
 GSSAPI_MIT_CONFIGURE_ON=	--with-gssapi=${GSSAPIBASEDIR} \
-				KRB5CONFIG="${KRB5CONFIG}"
+				KRB5_CONFIG="${KRB5CONFIG}"
 
 VIOLATE_RFC_2845_EXTRA_PATCHES=	${PATCHDIR}/extrapatch-bin_nsupdate_nsupdate.c
 
