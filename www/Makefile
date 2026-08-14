@@ -353,6 +353,7 @@
     SUBDIR += libmicrohttpd
     SUBDIR += libnghttp2
     SUBDIR += libnghttp3
+    SUBDIR += librefs
     SUBDIR += librespeed
     SUBDIR += librewolf
     SUBDIR += libwpe
