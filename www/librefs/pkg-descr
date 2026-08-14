@@ -1,2 +1,4 @@
-Minio is an object storage server built for cloud application developers and
-devops.
+libreFS is an object storage server built for cloud application developers
+and DevOps. It is the community fork of MinIO that keeps the full-featured,
+S3-compatible object store free: WebUI, LDAP/OIDC, distributed mode, and
+pre-built binaries included. Permanently under AGPL-3.0.
