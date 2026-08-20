@@ -1,0 +1,122 @@
+#!/bin/sh
+
+# PROVIDE: silo
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf to enable silo:
+#
+# silo_enable (bool):          The toggle to enable the service.
+#                              Set it to "YES" to enable silo
+# silo_config (path):          Set to directory to store silo config (deprecated)
+#                              Set to "%%ETCDIR%%" by default
+# silo_certs (path):           Set to "%%ETCDIR%%/certs" by default
+#                              Set to directory to certs dir
+# silo_disks (path):           Set to "%%DBDIR%%" by default.
+#                              Set it to directory to store silo data
+# silo_address (str):          Set to ":9000" by default.
+#                              Set it to address for silo to listen on
+# silo_console_address (str):  Not set by default
+#                              Set it to address for silo to listen on for console
+# silo_user (str):             Set to "%%USER%%" by default.
+#                              Set it to user to run silo under
+# silo_group (str):            Set to "%%GROUP%%" by default.
+#                              Set it to group to run silo under
+# silo_root_user (str):        Set to "minioadmin" by default.
+#                              Set root username
+# silo_root_password (str):    Set to "minioadmin" by default.
+#                              Set root's password
+# silo_root_access (str):      Set to "on" by default.
+#                              Set to "off" to disable root access
+# silo_logfile (str):          Set to "%%LOGFILE%%" by default.
+#                              Set it to file where stdout/stderr are logged.
+# silo_syslog_enable (bool):   Set to YES by default
+#                              Set it to NO to disable syslog output
+# silo_syslog_tag (str):       Set to "silo" by default.
+#                              Set syslog tag if syslog enabled
+# silo_syslog_priority (str):  Set to "info" by default.
+#                              Set syslog priority if syslog enabled
+# silo_syslog_facility (str):  Set to "daemon" by default.
+#                              Set syslog facility if syslog enabled
+#
+
+. /etc/rc.subr
+
+name=silo
+rcvar=silo_enable
+
+start_precmd="silo_start_precmd"
+
+load_rc_config ${name}
+
+: "${silo_enable:="NO"}"
+: "${silo_certs="%%ETCDIR%%/certs"}"
+: "${silo_disks="%%DBDIR%%"}"
+: "${silo_address=":9000"}"
+: "${silo_console_address=""}"
+: "${silo_user:="%%USER%%"}"
+: "${silo_group:="%%GROUP%%"}"
+: "${silo_root_user:="%%ROOT_USER%%"}"
+: "${silo_root_password:="%%ROOT_PASSWORD%%"}"
+: "${silo_root_access:="on"}"
+: "${silo_syslog_enable:="YES"}"
+: "${silo_syslog_tag:="silo"}"
+: "${silo_logfile:="%%LOGFILE%%"}"
+
+export MINIO_ROOT_USER="${silo_root_user}"
+export MINIO_ROOT_PASSWORD="${silo_root_password}"
+export MINIO_API_ROOT_ACCESS="${silo_root_access}"
+
+if checkyesno silo_syslog_enable; then
+    silo_syslog_output_flags="-T ${silo_syslog_tag}"
+    if [ -n "${silo_syslog_priority}" ]; then
+        silo_syslog_output_flags="${silo_syslog_output_flags} -s ${silo_syslog_priority}"
+    fi
+    if [ -n "${silo_syslog_facility}" ]; then
+        silo_syslog_output_flags="${silo_syslog_output_flags} -l ${silo_syslog_facility}"
+    fi
+else
+    silo_syslog_output_flags="-o ${silo_logfile}"
+fi
+
+# legacy compatibility
+if [ -n "${silo_config}" ]; then
+    silo_config_flag="-C \"${silo_config}\""
+fi
+
+if [ ! -z "${silo_console_address}" ]; then
+    silo_console_address_arg="--console-address \"${silo_console_address}\""
+else
+    silo_console_address_arg=""
+fi
+
+pidfile="/var/run/${name}.pid"
+procname="%%PREFIX%%/bin/silo"
+command="/usr/sbin/daemon"
+command_args="-f -t ${name} ${silo_syslog_output_flags} -p ${pidfile} /usr/bin/env ${silo_env} ${procname} ${silo_config_flag} -S \"${silo_certs}\" --quiet server --address=\"${silo_address}\" ${silo_console_address_arg} ${silo_disks} ${silo_args}"
+
+silo_start_precmd()
+{
+    if [ ! -e "${pidfile}" ]; then
+        install -m 0600 -o "${silo_user}" -g "${silo_group}" /dev/null "${pidfile}"
+    fi
+
+    if echo "${silo_disks}" | grep -E -q -v '^[^/]|\.{3}'; then
+        for disk in ${silo_disks}; do
+            if [ ! -d "${disk}" ]; then
+                install -d -m 0750 -o "${silo_user}" -g "${silo_group}" "${disk}"
+            fi
+        done
+    fi
+
+    if [ -n "${silo_config}" ] && [ ! -d "${silo_config}" ]; then
+        install -d -m 0750 -o "${silo_user}" -g "${silo_group}" "${silo_config}"
+    fi
+
+    if ! checkyesno silo_syslog_enable && [ ! -e "${silo_logfile}" ]; then
+        install -m 0640 -o "${silo_user}" -g "${silo_group}" /dev/null "${silo_logfile}"
+    fi
+}
+
+run_rc_command "$1"

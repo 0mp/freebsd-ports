@@ -2569,6 +2569,7 @@
     SUBDIR += sfeed
     SUBDIR += shiori
     SUBDIR += silicon
+    SUBDIR += silo
     SUBDIR += simple-web-server
     SUBDIR += sitecopy
     SUBDIR += slowcgi

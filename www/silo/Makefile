@@ -1,44 +1,47 @@
-PORTNAME=	minio
+PORTNAME=	silo
 DISTVERSION=	${GH_TAGNAME:S/RELEASE.//:S/Z//:S/T/-/:S/-/./g}
-PORTREVISION=	12
 CATEGORIES=	www
-DIST_SUBDIR=	minio
+PKGNAMEPREFIX=	pgsty-
 
-MAINTAINER=	bofh@FreeBSD.org
-COMMENT=	Amazon S3 compatible object storage server
-WWW=		https://minio.io/
+MAINTAINER=	0mp@FreeBSD.org
+COMMENT=	Object storage comaptible with MinIO and S3
+WWW=		https://silo.pgsty.com
 
 LICENSE=	AGPLv3
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
-DEPRECATED=	Upstream unmaintained
-EXPIRATION_DATE=	2026-12-31
-
-USES=		compiler cpe go:modules
-GH_TAGNAME=	RELEASE.2025-10-15T17-29-55Z
-CPE_VERSION=	${GH_TAGNAME}
+USES=		compiler go:modules
+USE_GITHUB=	yes
+GH_ACCOUNT=	pgsty
+GH_TAGNAME=	RELEASE.2026-08-06T00-00-00Z
 USE_RC_SUBR=	${PORTNAME}
 
-COMMIT_ID=	9e49d5e7a648f00e26f2246f4dc28e6b07f8c84a
-
-GO_MODULE=	github.com/minio/minio@v0.0.0-${DISTVERSION:S/.//g}-${COMMIT_ID:C/^(.{12}).*/\1/}
+GO_MOD_DIST=	github
+GO_MODULE=	github.com/minio/minio@${GH_TAGNAME}
 GO_BUILDFLAGS=	-ldflags=' \
 		-X github.com/minio/minio/cmd.Version=${GH_TAGNAME:C/RELEASE\.//:C|(..)-(..)-(..)Z|\1:\2:\3Z|} \
 		-X github.com/minio/minio/cmd.ReleaseTag=${GH_TAGNAME} \
-		-X github.com/minio/minio/cmd.CommitID=${COMMIT_ID} \
-		-X github.com/minio/minio/cmd.ShortCommitID=${COMMIT_ID:C|(............).*|\1|} \
+		-X github.com/minio/minio/cmd.CommitID=${_COMMIT_ID} \
+		-X github.com/minio/minio/cmd.ShortCommitID=${_COMMIT_ID:C|(............).*|\1|} \
 		-X github.com/minio/minio/cmd.GOPATH=${WRKSRC} ${STRIP} -w'
 
-SUB_LIST=	DBDIR=${MINIO_DBDIR} \
+SUB_LIST=	DBDIR=${_DBDIR} \
 		GROUP="${GROUPS}" \
+		LOGFILE="${_LOGFILE}" \
+		ROOT_PASSWORD="${_ROOT_PASSWORD}" \
+		ROOT_USER="${_ROOT_USER}" \
 		USER="${USERS}"
 
-USERS=		${MINIO_USER}
-GROUPS=		${MINIO_GROUP}
+USERS=		${_NAME}
+GROUPS=		${_NAME}
 
 PLIST_FILES=	bin/${PORTNAME}
 
-MINIO_USER?=	${PORTNAME}
-MINIO_GROUP?=	${PORTNAME}
-MINIO_DBDIR?=	/var/db/${PORTNAME}
+_COMMIT_ID=	3be10fcc1a44f6620ded0bd303461f9d688cca23
+_DBDIR=		/var/db/${_NAME}
+_LOGFILE=	/var/log/${_NAME}.log
+_NAME=		${PORTNAME}
+_ROOT_USER=	${_NAME}
+_ROOT_PASSWORD=	${_NAME}
 
 .include <bsd.port.mk>
