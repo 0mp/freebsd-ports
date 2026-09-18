@@ -1,11 +1,11 @@
---- config/compiler/__init__.py.orig	2021-08-10 22:46:49 UTC
+--- config/compiler/__init__.py.orig	2026-01-02 13:27:38 UTC
 +++ config/compiler/__init__.py
-@@ -308,7 +308,7 @@ def configure(conf, cstd = 'c99'):
+@@ -259,7 +259,7 @@ def configure(conf, cstd = 'c99'):
      # Optimizations
      if optimize:
          if compiler_mode == 'gnu':
--            env.AppendUnique(CCFLAGS = ['-O3', '-funroll-loops'])
-+            env.AppendUnique(CCFLAGS = ['-funroll-loops'])
+-            env.AppendUnique(CCFLAGS = ['-O3'])
++            env.AppendUnique(CCFLAGS = [''])
  
          elif compiler_mode == 'msvc':
              env.AppendUnique(CCFLAGS = ['/O2', '/Zc:throwingNew'])
