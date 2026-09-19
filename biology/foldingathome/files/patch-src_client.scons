@@ -1,0 +1,16 @@
+--- src/client.scons.orig	2026-09-18 23:22:56 UTC
++++ src/client.scons
+@@ -1,4 +1,5 @@ import glob
+ import glob
++import sys
+ 
+ Import('*')
+ 
+@@ -24,6 +25,7 @@ elif env['PLATFORM'] == 'darwin': src += Glob('fah/cli
+     src += Glob('fah/client/win/*.cpp')
+ 
+ elif env['PLATFORM'] == 'darwin': src += Glob('fah/client/osx/*.cpp')
++elif env['PLATFORM'] == 'posix' and sys.platform.startswith('freebsd'): src += Glob('fah/client/freebsd/*.cpp')
+ else: src += Glob('fah/client/lin/*.cpp')
+ 
+ # Build Info

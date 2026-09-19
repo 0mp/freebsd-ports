@@ -1,0 +1,20 @@
+--- SConstruct.orig	2026-09-18 23:24:25 UTC
++++ SConstruct
+@@ -1,5 +1,6 @@ import os
+ # Setup
+ import os
++import sys
+ import json
+ env = Environment(ENV = os.environ)
+ try:
+@@ -52,6 +53,10 @@ if not env.GetOption('clean'):
+             env.AppendUnique(LINKFLAGS = flags)
+ 
+         env.Append(PREFER_DYNAMIC = 'z lz4 systemd m'.split())
++
++        if sys.platform.startswith('freebsd'):
++            conf.CBRequireLib('event_pthreads')
++            #env.Append(LIBS = ['event_pthreads'])
+ 
+ conf.Finish()
+ 

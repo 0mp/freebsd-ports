@@ -52,6 +52,7 @@
     SUBDIR += erminej
     SUBDIR += exonerate
     SUBDIR += fasda
+    SUBDIR += foldingathome
     SUBDIR += fasda-utils
     SUBDIR += fasta
     SUBDIR += fasta3
