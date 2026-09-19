@@ -1,7 +1,7 @@
 PORTNAME=	CAMotics
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.3.0
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	cad
 
 MAINTAINER=	thierry@FreeBSD.org
@@ -71,7 +71,7 @@ MAKE_ARGS+=	cc="${CC}"	\
 		compiler="${CHOSEN_COMPILER_TYPE:C/gcc/gnu/}"	\
 		disable_local="zlib bzip2 lz4 sqlite3 expat libevent re2 libyaml"
 MAKE_ENV+=	QT5DIR="${LOCALBASE}"	\
-		CBANG_HOME="${WRKDIR}/cbang"
+		CBANG_HOME="${LOCALBASE}/libexec/cbang"
 .if defined(WITH_DEBUG)
 MAKE_ARGS+=	debug=1 strict=0
 .endif
@@ -82,8 +82,6 @@ TEST_WRKSRC=	${WRKSRC}/tests
 DO_MAKE_TEST=	${SETENV} ${TEST_ENV} ${MAKE_CMD} ${MAKE_FLAGS} ${MAKEFILE} ${TEST_ARGS}
 
 pre-configure:
-	${CP} -R ${LOCALBASE}/share/cbang ${WRKDIR}
-	${RLN} ${LOCALBASE}/include ${WRKDIR}/cbang/
 	${REINPLACE_CMD} -e "/python_version/s|'3'|'${PYTHON_VER}'|"	\
 		${WRKSRC}/SConstruct
 	${REINPLACE_CMD} -e 's|/share/doc/camotics/examples|/${EXAMPLESDIR_REL}|'	\
