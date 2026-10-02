@@ -56,10 +56,11 @@ PLIST_SUB=		ABI=${ABIFLAGS} \
 			XYZDOT=${DISTVERSION:C/[a-z].*//} \
 			OSMAJOR=${OSVERSION:C/([0-9]*)[0-9]{5}/\1/}		# For plat-freebsd* in pkg-plist. https://bugs.python.org/issue19554
 
-OPTIONS_DEFINE=		DEBUG IPV6 LIBMPDEC LTO NLS PYMALLOC
+OPTIONS_DEFINE=		DEBUG DTRACE IPV6 LIBMPDEC LTO NLS PYMALLOC
 OPTIONS_DEFAULT=	LIBMPDEC LTO PYMALLOC
-OPTIONS_EXCLUDE_powerpc64=	LTO
-OPTIONS_EXCLUDE_riscv64=	LTO
+OPTIONS_EXCLUDE_aarch64=	DTRACE
+OPTIONS_EXCLUDE_powerpc64=	DTRACE LTO
+OPTIONS_EXCLUDE_riscv64=	DTRACE LTO
 OPTIONS_RADIO=		HASH
 OPTIONS_RADIO_HASH=	FNV SIPHASH
 OPTIONS_SUB=		yes
@@ -72,6 +73,11 @@ PYMALLOC_DESC=		Enable specialized mallocs
 HASH_DESC=		Hash Algorithm (PEP-456)
 FNV_DESC=		Modified Fowler-Noll-Vo Algorithm
 SIPHASH_DESC=		SipHash24 Algorithm
+
+DTRACE_CONFIGURE_WITH=	dtrace
+DTRACE_PREVENTS=	LTO
+DTRACE_PREVENTS_MSG=	LTO implies .o files with LLVM bitcode, while DTrace needs ELF objects
+DTRACE_PLIST_FILES=	include/python%%XYDOT%%%%ABI%%/pydtrace_probes.h
 
 FNV_CONFIGURE_ON=	--with-hash-algorithm=fnv
 SIPHASH_CONFIGURE_ON=	--with-hash-algorithm=siphash24
