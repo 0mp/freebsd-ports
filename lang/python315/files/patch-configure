@@ -1,0 +1,20 @@
+--- configure.orig	2026-10-02 14:08:01 UTC
++++ configure
+@@ -19836,7 +19836,7 @@ else case e in #(
+             ac_cv_dtrace_link=no
+             echo 'BEGIN{}' > conftest.d
+             case $host in
+-                *netbsd*)
++                *freebsd*|*netbsd*)
+                     DTRACE_TEST_FLAGS="-x nolibs -h"
+                     ;;
+                 *)
+@@ -19855,7 +19855,7 @@ printf "%s\n" "$ac_cv_dtrace_link" >&6; }
+     fi
+     # Set NetBSD-specific DTrace flags in DFLAGS
+     case $host in
+-        *netbsd*)
++        *freebsd*|*netbsd*)
+             DFLAGS="$DFLAGS -x nolibs"
+             ;;
+     esac
