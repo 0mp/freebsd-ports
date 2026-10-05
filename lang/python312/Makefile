@@ -48,8 +48,10 @@ PLIST_SUB=		ABI=${ABIFLAGS} \
 			DISTVERSION=${DISTVERSION} \
 			OSMAJOR=${OSVERSION:C/([0-9]*)[0-9]{5}/\1/}		# For plat-freebsd* in pkg-plist. https://bugs.python.org/issue19554
 
-OPTIONS_DEFINE=		DEBUG IPV6 LIBMPDEC LTO NLS PYMALLOC
+OPTIONS_DEFINE=		DEBUG DTRACE IPV6 LIBMPDEC LTO NLS PYMALLOC
 OPTIONS_DEFAULT=	LIBMPDEC LTO PYMALLOC
+OPTIONS_DEFAULT+=	DTRACE
+#OPTIONS_DEFAULT:=	${OPTIONS_DEFAULT:NLTO}
 OPTIONS_EXCLUDE_riscv64=	LTO
 OPTIONS_RADIO=		HASH
 OPTIONS_RADIO_HASH=	FNV SIPHASH
@@ -63,6 +65,14 @@ HASH_DESC=		Hash Algorithm (PEP-456)
 FNV_DESC=		Modified Fowler-Noll-Vo Algorithm
 SIPHASH_DESC=		SipHash24 Algorithm
 
+DTRACE_CONFIGURE_WITH=	dtrace
+DTRACE_USES=		gmake
+# DTRACE_CONFIGURE_ENV+=	DFLAGS="-64 -x nolibs"
+# DTRACE_CONFIGURE_ENV+=	DFLAGS="-x nolibs"
+DTRACE_CONFIGURE_ENV+=	DTRACE_OBJS=Python/pydtrace.o
+DTRACE_PREVENTS=	LTO
+DTRACE_PREVENTS_MSG=	dtrace: failed to link script Include/pydtrace.d: invalid file type: Python/ceval.o
+DTRACE_PLIST_FILES=	${PYTHON_INCLUDEDIR}${ABIFLAGS}/pydtrace_probes.h
 FNV_CONFIGURE_ON=	--with-hash-algorithm=fnv
 SIPHASH_CONFIGURE_ON=	--with-hash-algorithm=siphash24
 
@@ -133,6 +143,10 @@ post-patch:
 .  for _module in ${DISABLED_EXTENSIONS}
 		@${ECHO_CMD} ${_module} >> ${WRKSRC}/Modules/Setup.local
 .  endfor
+
+post-patch-DTRACE-on:
+	@${REINPLACE_CMD} -e 's|-G -s conftest.d|-h -x nolibs -s conftest.d|' ${WRKSRC}/configure
+	@${REINPLACE_CMD} -e '/$$(DTRACE).*$$(DFLAGS)/s| -G -s $$< | -G -x nolibs -s $$(srcdir)/Include/pydtrace.d |' ${WRKSRC}/Makefile.pre.in
 
 post-install:
 .if ! ${PORT_OPTIONS:MDEBUG}
